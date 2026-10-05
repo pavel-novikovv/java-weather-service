@@ -6,6 +6,7 @@ import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
 import java.nio.charset.StandardCharsets;
 import java.time.Duration;
+import java.util.Locale;
 
 public class WeatherApp {
 
@@ -20,10 +21,22 @@ public class WeatherApp {
             String body = fetch(request, apiKey);
             System.out.println("Полный ответ сервиса:");
             System.out.println(body);
+            ForecastReport report = ForecastReport.parse(body, request.limit());
+            System.out.println();
+            System.out.println("Текущая температура (fact.temp): " + format(report.currentTemperature()) + " °C");
+            System.out.println("Средняя дневная температура за " + report.days()
+                    + " сут. (среднее forecasts[*].parts.day.temp_avg): " + format(report.averageDayTemperature()) + " °C");
         } catch (IllegalArgumentException | IllegalStateException e) {
             System.err.println(e.getMessage());
             System.exit(1);
         }
+    }
+
+    private static String format(double value) {
+        if (value == Math.rint(value)) {
+            return String.valueOf((long) value);
+        }
+        return String.format(Locale.ROOT, "%.1f", value);
     }
 
     private static String readApiKey() {
