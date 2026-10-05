@@ -30,7 +30,7 @@ mvn -q compile exec:java -Dexec.args="55.75 37.62 5"
 ```text
 Запрос: GET https://api.weather.yandex.ru/v2/forecast?lat=55.75&lon=37.62&limit=5
 Полный ответ сервиса:
-{"now":1791214943,"now_dt":"2026-10-05T15:42:23.833245Z","info":{"n":true,"url":"https://yandex.ru/pogoda/?lat=55.75&lon=37.62", ...
+{"now":1791214943,"now_dt":"2026-10-05T15:42:23.833245Z","info":{"n":true,"url":"https://yandex.ru/pogoda/?lat=55.75\u0026lon=37.62", ...
 
 Текущая температура (fact.temp): 11 °C
 Средняя дневная температура за 5 сут. (среднее forecasts[*].parts.day.temp_avg): 13.8 °C
